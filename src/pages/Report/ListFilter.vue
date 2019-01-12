@@ -2,7 +2,7 @@
   <div class="listFilter">
     <section>
       <p>Brukare</p>
-      <select>
+      <select v-model="selectedUser">
         <option v-for="user in users" :value="user.id" :key="user.id">{{ user.name }}</option>
       </select>
     </section>
@@ -21,25 +21,28 @@
 export default {
   data() {
     return {
+      selectedUser: 0,
       freetext: '',
       users: [
         {
           name: '---',
-          id: -1
+          id: 0
         },
         {
           name: 'Magnus Ferm',
-          id: 123141
+          id: 666
         },
         {
           name: 'Ida Ferm',
-          id: 412312
+          id: 333
         }
       ]
     };
   },
   methods: {
-    onButtonClick: () => {}
+    onButtonClick: function() {
+      this.$emit('click-filter', this.selectedUser);
+    }
   }
 };
 </script>
