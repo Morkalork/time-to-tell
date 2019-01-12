@@ -3,13 +3,25 @@
     <ul>
       <side-bar-item url="/" text="Hem" icon="home" :isOpen="activeRoute === '/'"/>
       <side-bar-item
-        url="/report"
+        url="/report/list"
         text="Tidrapport"
         icon="clock"
         :isOpen="activeRoute.includes('/report')"
       >
-        <side-bar-item url="/report/list" text="Lista" icon="angle-right"/>
-        <side-bar-item url="/report/archive" text="Arkiv" icon="angle-right"/>
+        <ul>
+          <side-bar-item
+            url="/report/list"
+            text="Lista"
+            icon="angle-right"
+            :isOpen="activeRoute === '/report/list'"
+          />
+          <side-bar-item
+            url="/report/archive"
+            text="Arkiv"
+            icon="angle-right"
+            :isOpen="activeRoute === '/report/list'"
+          />
+        </ul>
       </side-bar-item>
       <side-bar-item
         url="/profile"

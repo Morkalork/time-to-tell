@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Home from '../pages/Home';
-import Report from '../pages/Report/Report';
 import ReportList from '../pages/Report/List';
 import ReportArchive from '../pages/Report/Archive';
 import Profile from '../pages/Profile/Profile';
@@ -15,11 +14,6 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
-    },
-    {
-      path: '/report',
-      name: 'Report',
-      component: Report
     },
     {
       path: '/report/list',

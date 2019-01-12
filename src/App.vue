@@ -35,16 +35,22 @@ export default {
   }
 
   span,
-  a,
   p,
   h1,
   h2,
   h3,
   h4,
   h5,
-  h6 {
-    color: #333;
+  h6,
+  td,
+  th {
     font-family: 'Staatliches', 'tahoma', 'arial';
+    color: #333;
+  }
+
+  a {
+    font-family: 'Staatliches', 'tahoma', 'arial';
+    text-decoration: none;
   }
 
   h1,
@@ -54,10 +60,6 @@ export default {
   h5,
   h6{
     margin-bottom: 0.75rem;
-  }
-
-  a {
-    text-decoration: none;
   }
 }
 </style>

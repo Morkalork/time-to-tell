@@ -1,16 +1,10 @@
 <template>
   <li class="sideBarItem" v-bind:class="{active: isOpen}">
     <i :class="getIconName(icon)"></i>
-    <router-link v-bind:to="url">
-      <span v-on:click="onClick">
-        {{ text }}
-      </span>
-    </router-link>
+    <router-link v-bind:to="url">{{ text }}</router-link>
     <transition name="children" tag="div">
       <div class="children" v-if="isOpen">
-        <ul>
-          <slot></slot>
-        </ul>
+        <slot></slot>
       </div>
     </transition>
   </li>
@@ -28,9 +22,6 @@ export default {
   methods: {
     getIconName: function(iconName) {
       return `fas fa-fw fa-${iconName}`;
-    },
-    onClick: function() {
-      this.$emit('click-item', this.url);
     }
   }
 };
@@ -40,18 +31,36 @@ export default {
 .sideBarItem {
   list-style-type: none;
   margin-left: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
 
   a {
     font-weight: bold;
     padding-left: 0.5rem;
     transition: 0.15s;
+    color: #444;
+  }
+
+  &.active {
+    a {
+      color: #000;
+    }
   }
 
   &:hover {
     &:not(.active) {
       a {
         padding-left: 0.75rem;
+      }
+    }
+  }
+
+  .children {
+    ul {
+      margin-left: -1rem;
+      li {
+        padding: 0;
+        font-size: 1.25rem;
+        margin-left: 3rem;
       }
     }
   }
@@ -65,17 +74,6 @@ export default {
   }
   .children-leave-to {
     transform: translate(-100%, 0);
-  }
-
-  .children {
-    ul {
-      margin-left: -1rem;
-      li {
-        padding: 0;
-        font-size: 1.25rem;
-        margin-left: 3rem;
-      }
-    }
   }
 }
 </style>
