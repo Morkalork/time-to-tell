@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-app.get('/api/v1/reports', (req, res) => {
+app.get('/api/v1/reports/:id', (req, res) => {
   res.status(200).send({
     success: 'true',
     reports: [

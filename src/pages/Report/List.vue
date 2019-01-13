@@ -3,11 +3,12 @@
     <h1>Lista över tidrapporteringar</h1>
     <list-filter @select-user="selectUser" @filter-user="filterUser" :users="users"/>
     <hr>
-    <report-sheet :reports="filteredReports" :filter='userFilter' />
+    <report-sheet :reports="filteredReports" :filter="userFilter"/>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import ListFilter from './ListFilter';
 import ReportSheet from './ReportSheet';
 
@@ -29,85 +30,34 @@ export default {
     return {
       selectedUser: 0,
       userFilter: '',
-      reports: [],
       users: []
     };
   },
   computed: {
     filteredReports: function() {
-      if (this.selectedUser) {
-        return this.reports.filter(
-          report => report.userId === this.selectedUser
-        );
+      const reports = this.reports;
+      if (!reports) {
+        return [];
+      } else if (this.selectedUser) {
+        return reports.filter(report => report.userId === this.selectedUser);
       } else if (this.userFilter) {
-        return this.reports.filter(report =>
+        return reports.filter(report =>
           report.userName.toLowerCase().includes(this.userFilter.toLowerCase())
         );
       } else {
-        return this.reports;
+        return reports;
       }
-    }
+    },
+    ...mapState({
+      reports: (state) => {
+        return state.report.reports;
+      }
+    })
+  },
+  created() {
+    this.$store.dispatch('report/load', { userId: this.selectedUser });
   },
   mounted() {
-    this.reports = [
-      {
-        id: 1,
-        userName: 'Magnus Ferm',
-        userId: 666,
-        period: '2018 v52',
-        status: 'Inlämnad',
-        signed: true
-      },
-      {
-        id: 2,
-        userName: 'Magnus Ferm',
-        userId: 666,
-        period: '2019 v01',
-        status: 'Inlämnad',
-        signed: false
-      },
-      {
-        id: 3,
-        userName: 'Magnus Ferm',
-        userId: 666,
-        period: '2019 v02',
-        status: 'Ej inlämnad',
-        signed: false
-      },
-      {
-        id: 4,
-        userName: 'Ida Ferm',
-        userId: 333,
-        period: '2018 v52',
-        status: 'Inlämnad',
-        signed: true
-      },
-      {
-        id: 5,
-        userName: 'Ida Ferm',
-        userId: 333,
-        period: '2019 v01',
-        status: 'Inlämnad',
-        signed: false
-      },
-      {
-        id: 6,
-        userName: 'Melvin Butterscough',
-        userId: 111,
-        period: '2019 v01',
-        status: 'Inlämnad',
-        signed: false
-      },
-      {
-        id: 7,
-        userName: 'Melvin Butterscough',
-        userId: 111,
-        period: '2019 v02',
-        status: 'Ej inlämnad',
-        signed: false
-      }
-    ];
-
     this.users = [
       {
         name: '---',
