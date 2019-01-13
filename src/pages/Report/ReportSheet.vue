@@ -2,11 +2,10 @@
   <table class="reportSheet">
     <thead>
       <tr>
-        <th>Brukare</th>
+        <th>Användare</th>
         <th>Tidsperiod</th>
         <th>Status</th>
-        <th>Assistent</th>
-        <th>Signerat</th>
+        <th>Signerad</th>
       </tr>
     </thead>
     <tbody>
@@ -14,7 +13,6 @@
         <td>{{report.user}}</td>
         <td>{{report.period}}</td>
         <td>{{report.status}}</td>
-        <td>{{report.assistant}}</td>
         <td><i class='fas fa-fw fa-check' v-if='report.signed'></i></td>
       </tr>
     </tbody>

@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <h1>Lista över tidrapporteringar</h1>
-    <list-filter @click-filter="clickFilter"/>
+    <list-filter @select-user="selectUser" :users="users"/>
     <hr>
     <report-sheet :reports="filteredReports"/>
   </div>
@@ -18,7 +18,7 @@ export default {
     ReportSheet
   },
   methods: {
-    clickFilter: function(selectedUser) {
+    selectUser: function(selectedUser) {
       if (selectedUser) {
         this.selectedUser = selectedUser;
         this.filteredReports = this.reports.filter(
@@ -33,7 +33,8 @@ export default {
     return {
       selectedUser: 0,
       reports: [],
-      filteredReports: []
+      filteredReports: [],
+      users: []
     };
   },
   mounted() {
@@ -43,8 +44,7 @@ export default {
         user: 'Magnus Ferm',
         userId: 666,
         period: '2018 v52',
-        status: 'Färdig',
-        assistant: 'Quasimódo',
+        status: 'Inlämnad',
         signed: true
       },
       {
@@ -52,8 +52,7 @@ export default {
         user: 'Magnus Ferm',
         userId: 666,
         period: '2019 v01',
-        status: 'Färdig',
-        assistant: '',
+        status: 'Inlämnad',
         signed: false
       },
       {
@@ -61,8 +60,7 @@ export default {
         user: 'Magnus Ferm',
         userId: 666,
         period: '2019 v02',
-        status: 'Ej färdig',
-        assistant: '',
+        status: 'Ej inlämnad',
         signed: false
       },
       {
@@ -70,8 +68,7 @@ export default {
         user: 'Ida Ferm',
         userId: 333,
         period: '2018 v52',
-        status: 'Färdig',
-        assistant: 'Quasimódo',
+        status: 'Inlämnad',
         signed: true
       },
       {
@@ -79,12 +76,26 @@ export default {
         user: 'Ida Ferm',
         userId: 333,
         period: '2019 v01',
-        status: 'Färdig',
-        assistant: '',
+        status: 'Inlämnad',
         signed: false
       }
     ];
     this.filteredReports = this.reports;
+
+    this.users = [
+      {
+        name: '---',
+        id: 0
+      },
+      {
+        name: 'Magnus Ferm',
+        id: 666
+      },
+      {
+        name: 'Ida Ferm',
+        id: 333
+      }
+    ];
   }
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div class="listFilter">
     <section>
-      <p>Brukare</p>
-      <select v-model="selectedUser">
+      <p>Användare</p>
+      <select v-model="selectedUser" v-on:change='selectUser'>
         <option v-for="user in users" :value="user.id" :key="user.id">{{ user.name }}</option>
       </select>
     </section>
@@ -10,38 +10,21 @@
       <p>Fritext</p>
       <input v-model="freetext">
     </section>
-    <section>
-      <p></p>
-      <button v-on:click="onButtonClick">Filtrera</button>
-    </section>
   </div>
 </template>
 
 <script>
 export default {
+  props: ['users'],
   data() {
     return {
       selectedUser: 0,
-      freetext: '',
-      users: [
-        {
-          name: '---',
-          id: 0
-        },
-        {
-          name: 'Magnus Ferm',
-          id: 666
-        },
-        {
-          name: 'Ida Ferm',
-          id: 333
-        }
-      ]
+      freetext: ''
     };
   },
   methods: {
-    onButtonClick: function() {
-      this.$emit('click-filter', this.selectedUser);
+    selectUser: function() {
+      this.$emit('select-user', this.selectedUser);
     }
   }
 };
