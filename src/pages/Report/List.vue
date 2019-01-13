@@ -29,8 +29,7 @@ export default {
   data() {
     return {
       selectedUser: 0,
-      userFilter: '',
-      users: []
+      userFilter: ''
     };
   },
   computed: {
@@ -49,33 +48,13 @@ export default {
       }
     },
     ...mapState({
-      reports: (state) => {
-        return state.report.reports;
-      }
+      reports: state => state.report.reports,
+      users: state => state.user.users
     })
   },
   created() {
     this.$store.dispatch('report/load', { userId: this.selectedUser });
-  },
-  mounted() {
-    this.users = [
-      {
-        name: '---',
-        id: 0
-      },
-      {
-        name: 'Magnus Ferm',
-        id: 666
-      },
-      {
-        name: 'Ida Ferm',
-        id: 333
-      },
-      {
-        name: 'Melvin Butterscough',
-        id: 111
-      }
-    ];
+    this.$store.dispatch('user/load');
   }
 };
 </script>
