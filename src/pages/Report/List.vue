@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <h1>Lista över tidrapporteringar</h1>
-    <list-filter @select-user="selectUser" :users="users"/>
+    <list-filter @select-user="selectUser" @filter-user="filterUser" :users="users"/>
     <hr>
     <report-sheet :reports="filteredReports"/>
   </div>
@@ -20,11 +20,15 @@ export default {
   methods: {
     selectUser: function(selectedUser) {
       this.selectedUser = selectedUser;
+    },
+    filterUser: function(text) {
+      this.userFilter = text;
     }
   },
   data() {
     return {
       selectedUser: 0,
+      userFilter: '',
       reports: [],
       users: []
     };
@@ -32,7 +36,13 @@ export default {
   computed: {
     filteredReports: function() {
       if (this.selectedUser) {
-        return this.reports.filter(report => report.userId === this.selectedUser);
+        return this.reports.filter(
+          report => report.userId === this.selectedUser
+        );
+      } else if (this.userFilter) {
+        return this.reports.filter(report =>
+          report.user.toLowerCase().includes(this.userFilter.toLowerCase())
+        );
       } else {
         return this.reports;
       }

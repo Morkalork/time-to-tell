@@ -8,12 +8,14 @@
     </section>
     <section>
       <p>Fritext</p>
-      <input v-model="freetext">
+      <input v-model="freetext" v-on:keyup='debouncedFilterUser'>
     </section>
   </div>
 </template>
 
 <script>
+import debounce from 'lodash/debounce';
+
 export default {
   props: ['users'],
   data() {
@@ -25,7 +27,11 @@ export default {
   methods: {
     selectUser: function() {
       this.$emit('select-user', this.selectedUser);
-    }
+    },
+    debouncedFilterUser: debounce(function(e) {
+      console.log('Emit filter user ');
+      this.$emit('filter-user', e.target.value);
+    }, 250)
   }
 };
 </script>
