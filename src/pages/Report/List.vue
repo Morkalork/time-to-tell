@@ -19,23 +19,24 @@ export default {
   },
   methods: {
     selectUser: function(selectedUser) {
-      if (selectedUser) {
-        this.selectedUser = selectedUser;
-        this.filteredReports = this.reports.filter(
-          report => report.userId === selectedUser
-        );
-      } else {
-        this.filteredReports = this.reports;
-      }
+      this.selectedUser = selectedUser;
     }
   },
   data() {
     return {
       selectedUser: 0,
       reports: [],
-      filteredReports: [],
       users: []
     };
+  },
+  computed: {
+    filteredReports: function() {
+      if (this.selectedUser) {
+        return this.reports.filter(report => report.userId === this.selectedUser);
+      } else {
+        return this.reports;
+      }
+    }
   },
   mounted() {
     this.reports = [
@@ -78,9 +79,24 @@ export default {
         period: '2019 v01',
         status: 'Inlämnad',
         signed: false
+      },
+      {
+        id: 6,
+        user: 'Melvin Butterscough',
+        userId: 111,
+        period: '2019 v01',
+        status: 'Inlämnad',
+        signed: false
+      },
+      {
+        id: 7,
+        user: 'Melvin Butterscough',
+        userId: 111,
+        period: '2019 v02',
+        status: 'Ej inlämnad',
+        signed: false
       }
     ];
-    this.filteredReports = this.reports;
 
     this.users = [
       {
@@ -94,6 +110,10 @@ export default {
       {
         name: 'Ida Ferm',
         id: 333
+      },
+      {
+        name: 'Melvin Butterscough',
+        id: 111
       }
     ];
   }
