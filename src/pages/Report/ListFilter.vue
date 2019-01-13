@@ -29,7 +29,6 @@ export default {
       this.$emit('select-user', this.selectedUser);
     },
     debouncedFilterUser: debounce(function(e) {
-      console.log('Emit filter user ');
       this.$emit('filter-user', e.target.value);
     }, 250)
   }

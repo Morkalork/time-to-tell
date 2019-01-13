@@ -3,7 +3,7 @@
     <h1>Lista över tidrapporteringar</h1>
     <list-filter @select-user="selectUser" @filter-user="filterUser" :users="users"/>
     <hr>
-    <report-sheet :reports="filteredReports"/>
+    <report-sheet :reports="filteredReports" :filter='userFilter' />
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
         );
       } else if (this.userFilter) {
         return this.reports.filter(report =>
-          report.user.toLowerCase().includes(this.userFilter.toLowerCase())
+          report.userName.toLowerCase().includes(this.userFilter.toLowerCase())
         );
       } else {
         return this.reports;
@@ -52,7 +52,7 @@ export default {
     this.reports = [
       {
         id: 1,
-        user: 'Magnus Ferm',
+        userName: 'Magnus Ferm',
         userId: 666,
         period: '2018 v52',
         status: 'Inlämnad',
@@ -60,7 +60,7 @@ export default {
       },
       {
         id: 2,
-        user: 'Magnus Ferm',
+        userName: 'Magnus Ferm',
         userId: 666,
         period: '2019 v01',
         status: 'Inlämnad',
@@ -68,7 +68,7 @@ export default {
       },
       {
         id: 3,
-        user: 'Magnus Ferm',
+        userName: 'Magnus Ferm',
         userId: 666,
         period: '2019 v02',
         status: 'Ej inlämnad',
@@ -76,7 +76,7 @@ export default {
       },
       {
         id: 4,
-        user: 'Ida Ferm',
+        userName: 'Ida Ferm',
         userId: 333,
         period: '2018 v52',
         status: 'Inlämnad',
@@ -84,7 +84,7 @@ export default {
       },
       {
         id: 5,
-        user: 'Ida Ferm',
+        userName: 'Ida Ferm',
         userId: 333,
         period: '2019 v01',
         status: 'Inlämnad',
@@ -92,7 +92,7 @@ export default {
       },
       {
         id: 6,
-        user: 'Melvin Butterscough',
+        userName: 'Melvin Butterscough',
         userId: 111,
         period: '2019 v01',
         status: 'Inlämnad',
@@ -100,7 +100,7 @@ export default {
       },
       {
         id: 7,
-        user: 'Melvin Butterscough',
+        userName: 'Melvin Butterscough',
         userId: 111,
         period: '2019 v02',
         status: 'Ej inlämnad',
